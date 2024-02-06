@@ -1,4 +1,7 @@
-push:
+name: Automatizar Estilos
+
+on:
+  push:
     branches:
       - main
  
@@ -6,32 +9,32 @@ jobs:
   automatizar-estilos:
     runs-on: ubuntu-latest
  
-steps:
-- name: Checkout autoFigma_A
-      uses: actions/checkout@v2
-      with:
-        repository: plozanoo/autoFigma_A
-        ref: main
-        path: autoFigma_A
- 
-- name: Checkout autoFigma_B
-      uses: actions/checkout@v2
-      with:
-        repository: plozanoo/autoFigma_B
-        ref: main
-        path: autoFigma_B
- 
-- name: Crear directorio autoFigma_B
-      run: mkdir -p autoFigma_B
- 
-- name: Copiar cambios a autoFigma_B
-      run: rsync -av --exclude=autoFigma_B/ * autoFigma_B/
- 
-- name: Configurar usuario Git
-      run: |
-        cd AutomatizacionEstilos
-        git config user.email "plozanoo@.emeal.nttdatacom"
-        git config user.name "plozanoo"
-        git add .
-        git diff --quiet || git commit -m "Actualizar estilos desde autoFigma"
-        git push
+    steps:
+      - name: Checkout autoFigma_A
+        uses: actions/checkout@v2
+        with:
+          repository: plozanoo/autoFigma_A
+          ref: main
+          path: autoFigma_A
+
+      - name: Checkout autoFigma_B
+        uses: actions/checkout@v2
+        with:
+          repository: plozanoo/autoFigma_B
+          ref: main
+          path: autoFigma_B
+
+      - name: Crear directorio autoFigma_B
+        run: mkdir -p autoFigma_B
+
+      - name: Copiar cambios a autoFigma_B
+        run: rsync -av --exclude=autoFigma_B/ * autoFigma_B/
+
+      - name: Configurar usuario Git y hacer push
+        run: |
+          cd autoFigma_B
+          git config user.email "tu-email@ejemplo.com"
+          git config user.name "TuNombreDeUsuario"
+          git add .
+          git diff --quiet || git commit -m "Actualizar estilos desde autoFigma"
+          git push
