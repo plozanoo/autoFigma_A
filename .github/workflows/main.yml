@@ -6,32 +6,32 @@ jobs:
   automatizar-estilos:
     runs-on: ubuntu-latest
  
-    steps:
-    - name: Checkout autoFigma
+steps:
+- name: Checkout autoFigma
       uses: actions/checkout@v2
       with:
-        repository: AlvaroTaboada/autoFigma
+        repository: plozanoo/autoFigma_A
         ref: main
-        path: autoFigma
+        path: autoFigma_A
  
-    - name: Checkout AutomatizacionEstilos
+- name: Checkout autoFigma_B
       uses: actions/checkout@v2
       with:
-        repository: AlvaroTaboada/automatizacionestilos
+        repository: plozanoo/autoFigma_B
         ref: main
-        path: AutomatizacionEstilos
+        path: autoFigma_B
  
-    - name: Crear directorio AutomatizacionEstilos
-      run: mkdir -p AutomatizacionEstilos
+- name: Crear directorio autoFigma_B
+      run: mkdir -p autoFigma_B
  
-    - name: Copiar cambios a AutomatizacionEstilos
-      run: rsync -av --exclude=AutomatizacionEstilos/ * AutomatizacionEstilos/
+- name: Copiar cambios a autoFigma_B
+      run: rsync -av --exclude=autoFigma_B/ * autoFigma_B/
  
-    - name: Configurar usuario Git
+- name: Configurar usuario Git
       run: |
         cd AutomatizacionEstilos
-        git config user.email "ataboadr@.emeal.nttdatacom"
-        git config user.name "AlvaroTaboada"
+        git config user.email "plozanoo@.emeal.nttdatacom"
+        git config user.name "plozanoo"
         git add .
         git diff --quiet || git commit -m "Actualizar estilos desde autoFigma"
         git push
