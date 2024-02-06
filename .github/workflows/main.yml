@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
  
 steps:
-- name: Checkout autoFigma
+- name: Checkout autoFigma_A
       uses: actions/checkout@v2
       with:
         repository: plozanoo/autoFigma_A
