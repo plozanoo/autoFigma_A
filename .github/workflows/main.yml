@@ -31,11 +31,12 @@ jobs:
         run: rsync -av --exclude=autoFigma_B/ * autoFigma_B/
 
       - name: Configurar usuario Git y hacer push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ls -la
           cd autoFigma_B
           git config user.email "tu-email@ejemplo.com"
           git config user.name "TuNombreDeUsuario"
           git add .
           git diff --quiet || git commit -m "Actualizar estilos desde autoFigma"
-          git push
+          git push origin main
